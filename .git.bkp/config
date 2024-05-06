@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[submodule "threadx"]
+	url = git@github.com:eclipse-threadx/threadx.git
+	active = true
+[remote "origin"]
+	url = https://github.com/calperxd/TM4C129EXL_ThreadX.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
