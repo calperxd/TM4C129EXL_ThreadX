@@ -1,4 +1,3 @@
-#ifndef TX_USER_H
 #define TX_USER_H
 
 
@@ -242,6 +241,3 @@
 /*
 #define TX_BYTE_POOL_DELAY_VALUE              3
 */
-
-#endif
-
