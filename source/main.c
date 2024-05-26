@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-
-
 int main(void)
 {
     volatile uint32_t ui32Loop;
@@ -13,6 +11,6 @@ int main(void)
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
         for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++){}
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0x0);
-        for(ui32Loop = 0; ui32Loop < 2000000; ui32Loop++){}
+        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++){}
     }
 }

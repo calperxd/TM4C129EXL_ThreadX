@@ -42,10 +42,10 @@ static void IntDefaultHandler(void);
 //
 //*****************************************************************************
 extern int main(void);
-//extern void __tx_SVCallHandler();
-//extern void __tx_PendSVHandler();
-//extern void __tx_SysTickHandler();
-//extern void __tx_DBGHandler();
+extern void __tx_SVCallHandler();
+extern void __tx_PendSVHandler();
+extern void __tx_SysTickHandler();
+extern void __tx_DBGHandler();
 
 //*****************************************************************************
 //
