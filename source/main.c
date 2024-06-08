@@ -1,6 +1,24 @@
 #include "stdafx.h"
+#include "tx_api.h"
+
+void thread_entry(ULONG thread_input);
 
 int main(void)
+{
+    tx_kernel_enter();
+    return 0;
+}
+
+void tx_application_define(void *first_unused_memory)
+{
+    TX_THREAD my_thread;
+    static ULONG my_thread_stack[1024];
+    tx_thread_create(&my_thread, "My Thread", thread_entry, 0, 
+                     my_thread_stack, sizeof(my_thread_stack), 
+                     1, 1, TX_NO_TIME_SLICE, TX_AUTO_START);
+}
+
+void thread_entry(ULONG thread_input)
 {
     volatile uint32_t ui32Loop;
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);

@@ -73,11 +73,11 @@ __attribute__((section(".isr_vector"))) void (*const _vectors[])(void) = {
         0,                  // Reserved
         0,                  // Reserved
         0,                  // Reserved
-		IntDefaultHandler,  // SVCall handler
-		IntDefaultHandler,  // Debug monitor handler
+		__tx_SVCallHandler,  // SVCall handler
+		__tx_DBGHandler,  // Debug monitor handler
         0,                  // Reserved
-		IntDefaultHandler,  // The PendSV handler
-		IntDefaultHandler,  // The SysTick handler
+		__tx_PendSVHandler,  // The PendSV handler
+		__tx_SysTickHandler,  // The SysTick handler
         IntDefaultHandler,  // GPIO Port A
         IntDefaultHandler,  // GPIO Port B
         IntDefaultHandler,  // GPIO Port C

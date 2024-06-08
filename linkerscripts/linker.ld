@@ -23,8 +23,9 @@ SECTIONS
         *(.data*)
         _edata = .;
     } > SRAM
-    _end = _edata ;
+    _end = _edata;
     PROVIDE(end = _edata);
+    PROVIDE(__RAM_segment_used_end__ = _edata);
 
     .bss :
     {
