@@ -1,13 +1,12 @@
 /***************************************************************************
- * Copyright (c) 2024 Microsoft Corporation 
- * 
+ * Copyright (c) 2024 Microsoft Corporation
+ *
  * This program and the accompanying materials are made available under the
  * terms of the MIT License which is available at
  * https://opensource.org/licenses/MIT.
- * 
+ *
  * SPDX-License-Identifier: MIT
  **************************************************************************/
-
 
 /**************************************************************************/
 /**************************************************************************/
@@ -18,7 +17,6 @@
 /**                                                                       */
 /**************************************************************************/
 /**************************************************************************/
-
 
 /**************************************************************************/
 /*                                                                        */
@@ -71,7 +69,6 @@
 #ifndef TX_USER_H
 #define TX_USER_H
 
-
 /* Define various build options for the ThreadX port.  The application should either make changes
    here by commenting or un-commenting the conditional compilation defined OR supply the defines
    though the compiler's equivalent of the -D option.
@@ -104,7 +101,6 @@
    In addition, some services that are available in timers are not available from ISRs and will
    therefore return an error if this option is used. This may or may not be desirable for a
    given application.  */
-
 
 /* Override various options with default values already assigned in tx_port.h. Please also refer
    to tx_port.h for descriptions on each of these options.  */
@@ -175,7 +171,7 @@
 
 /* Determine if random number is used for stack filling. By default, ThreadX uses a fixed
    pattern for stack filling. When the following is defined, ThreadX uses a random number
-   for stack filling. This is effective only when TX_ENABLE_STACK_CHECKING is defined.  */ 
+   for stack filling. This is effective only when TX_ENABLE_STACK_CHECKING is defined.  */
 
 /*
 #define TX_ENABLE_RANDOM_NUMBER_STACK_FILLING
@@ -218,7 +214,6 @@
 #define TX_DISABLE_NOTIFY_CALLBACKS
 */
 
-
 /* Determine if the tx_thread_resume and tx_thread_suspend services should have their internal
    code in-line. This results in a larger image, but improves the performance of the thread
    resume and suspend services.  */
@@ -227,14 +222,12 @@
 #define TX_INLINE_THREAD_RESUME_SUSPEND
 */
 
-
 /* Determine if the internal ThreadX code is non-interruptable. This results in smaller code
    size and less processing overhead, but increases the interrupt lockout time.  */
 
 /*
 #define TX_NOT_INTERRUPTABLE
 */
-
 
 /* Determine if the trace event logging code should be enabled. This causes slight increases in
    code size and overhead, but provides the ability to generate system trace information which
@@ -243,7 +236,6 @@
 /*
 #define TX_ENABLE_EVENT_TRACE
 */
-
 
 /* Determine if block pool performance gathering is required by the application. When the following is
    defined, ThreadX gathers various block pool performance information. */
@@ -314,4 +306,3 @@
 */
 
 #endif
-

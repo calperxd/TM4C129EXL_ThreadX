@@ -12,17 +12,17 @@ if (NOT ARM_GXX)
     message(FATAL_ERROR "arm-none-eabi-g++ not found")
 endif()
 
-# Definir compiladores
+# Define compilers
 set(CMAKE_C_COMPILER ${ARM_GCC})
 set(CMAKE_CXX_COMPILER ${ARM_GXX})
 
-# Desabilitar testes de compilador
+# Disable gcc checks
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
 
 project(Hello C CXX ASM)
 
-# Configurações específicas do sistema embarcado
+# Specific settings to embedded systems
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR cortex-m4)
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
@@ -40,12 +40,13 @@ set(ELF_NAME ${PROJECT_NAME}.elf)
 set(THREADX_ARCH "cortex_m4")
 set(THREADX_TOOLCHAIN "gnu")
 
-# Incluir diretório para tx_user.h
-include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Definir variável para usar tx_user.h
+
+# DEFINE
 add_definitions(-DTX_INCLUDE_USER_DEFINE_FILE)
 
+# Include directories
+include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(include)
 include_directories(${TI_SDK})
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -53,7 +54,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 file(GLOB SOURCE "${CMAKE_SOURCE_DIR}/source/*.c")
 file(GLOB SOURCE_ASM "${CMAKE_SOURCE_DIR}/source/*.S")
 
-add_subdirectory(threadx)
+add_subdirectory(external/threadx)
 
 add_executable(${ELF_NAME} ${SOURCE} ${SOURCE_ASM})
 

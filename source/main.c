@@ -6,7 +6,7 @@ TX_THREAD uart_thread;
 static ULONG my_thread_stack[1024];
 static ULONG uart_thread_stack[1024];
 
-        void uartThread(ULONG thread_input) {
+void uartThread(ULONG thread_input) {
 
 }
 
@@ -32,9 +32,9 @@ int main(void) {
 }
 
 void tx_application_define(void* first_unused_memory) {
-
     tx_thread_create(&my_thread, "My Thread", thread_entry, 0, my_thread_stack, sizeof(my_thread_stack), 1, 1,
             TX_NO_TIME_SLICE, TX_AUTO_START);
 
-    tx_thread_create(&uart_thread, "UART", uartThread, 0, uart_thread_stack, sizeof(uart_thread_stack), 1, 1 , TX_NO_TIME_SLICE, TX_AUTO_START);
+    tx_thread_create(&uart_thread, "UART", uartThread, 0, uart_thread_stack, sizeof(uart_thread_stack), 1, 1,
+            TX_NO_TIME_SLICE, TX_AUTO_START);
 }
