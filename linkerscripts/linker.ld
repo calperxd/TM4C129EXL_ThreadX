@@ -9,18 +9,34 @@ SECTIONS
     .text :
     {
         _text = .;
-        KEEP(*(.isr_vector))
-        *(.text*)
-        *(.rodata*)
+        KEEP(*(.isr_vector))     /* Interrupt vectors */
+        *(.text*)                /* Code */
+        *(.rodata*)              /* Read-only data */
         _etext = .;
     } > FLASH
 
-    .data : AT(ADDR(.text) + SIZEOF(.text))
+    .ARM.exidx : AT(ADDR(.text) + SIZEOF(.text) + 4096)
     {
+        . = ALIGN(4);
+        *(.ARM.exidx*)
+        . = ALIGN(4);
+    } > FLASH
+
+    .eh_frame : AT(ADDR(.ARM.exidx) + SIZEOF(.ARM.exidx) + 4096)
+    {
+        . = ALIGN(4);
+        *(.eh_frame*)
+        . = ALIGN(4);
+    } > FLASH
+
+    .data : AT(ADDR(.eh_frame) + SIZEOF(.eh_frame) + 4096)
+    {
+        . = ALIGN(4);
         _data = .;
-        _ldata = LOADADDR (.data);
+        _ldata = LOADADDR(.data);
         *(vtable)
         *(.data*)
+        . = ALIGN(4);
         _edata = .;
     } > SRAM
     _end = _edata;
@@ -29,21 +45,24 @@ SECTIONS
 
     .bss :
     {
+        . = ALIGN(4);
         _bss = .;
         *(.bss*)
         *(COMMON)
+        . = ALIGN(4);
         _ebss = .;
     } > SRAM
 
     /* Heap and stack section definitions */
-    _heap = ORIGIN(SRAM) + LENGTH(SRAM);
-    _stack = ORIGIN(SRAM);
     .heap (COPY):
     {
         . = ALIGN(8);
         __end__ = .;
     } > SRAM
-    __HeapBase = ALIGN(_heap - 0x100);
-    __HeapLimit = .;
+
+    _heap = ORIGIN(SRAM) + LENGTH(SRAM) - 0x10000;
+    __HeapBase = _heap;
+    __HeapLimit = ORIGIN(SRAM) + LENGTH(SRAM);
+    _stack = ORIGIN(SRAM);
     __StackTop = ORIGIN(SRAM) + LENGTH(SRAM);
 }

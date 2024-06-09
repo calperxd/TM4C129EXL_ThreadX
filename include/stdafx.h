@@ -8,5 +8,6 @@
 #include "driverlib/debug.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
+#include "setup.h"
 
 #endif

@@ -7,9 +7,18 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
 #include "driverlib/uart.h"
 #include "inc/hw_memmap.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "driverlib/pin_map.h"
 
-void setupUart();
+void SetupClock();
+void SetupUserLed();
+void SetupUart();
+void UARTPrintf(const char* pcFormat, ...);
 
 #endif  // HELLO_SETUP_H

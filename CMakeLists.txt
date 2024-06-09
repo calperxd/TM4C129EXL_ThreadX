@@ -40,8 +40,6 @@ set(ELF_NAME ${PROJECT_NAME}.elf)
 set(THREADX_ARCH "cortex_m4")
 set(THREADX_TOOLCHAIN "gnu")
 
-
-
 # DEFINE
 add_definitions(-DTX_INCLUDE_USER_DEFINE_FILE)
 
@@ -49,7 +47,15 @@ add_definitions(-DTX_INCLUDE_USER_DEFINE_FILE)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(include)
 include_directories(${TI_SDK})
-include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Comandos para substituir o tx_user_sample.h pelo tx_user.h
+add_custom_command(
+        OUTPUT ${CMAKE_SOURCE_DIR}/external/threadx/common/inc/tx_user.h
+        COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_SOURCE_DIR}/external/threadx/common/inc/tx_user_sample.h
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/include/tx_user.h ${CMAKE_SOURCE_DIR}/external/threadx/common/inc/tx_user.h
+        DEPENDS ${CMAKE_SOURCE_DIR}/include/tx_user.h
+        COMMENT "Replacing tx_user_sample.h with tx_user.h"
+)
 
 file(GLOB SOURCE "${CMAKE_SOURCE_DIR}/source/*.c")
 file(GLOB SOURCE_ASM "${CMAKE_SOURCE_DIR}/source/*.S")
@@ -59,10 +65,10 @@ add_subdirectory(external/threadx)
 add_executable(${ELF_NAME} ${SOURCE} ${SOURCE_ASM})
 
 # Linkar a biblioteca ThreadX
-target_link_libraries(${ELF_NAME} m ${CMAKE_SOURCE_DIR}/lib/libdriver.a threadx)
+target_link_libraries(${ELF_NAME} ${CMAKE_SOURCE_DIR}/lib/libdriver.a threadx)
 target_compile_options(${ELF_NAME} PUBLIC -Wall ${FPU_FLAGS} ${FLOAT_ABI_FLAGS})
 
 add_custom_command(TARGET ${ELF_NAME} POST_BUILD
-    COMMAND arm-none-eabi-objcopy -O binary ${ELF_NAME} ${BIN_NAME}
-    COMMENT "Converting ${ELF_NAME} to ${BIN_NAME}"
-    VERBATIM)
+        COMMAND arm-none-eabi-objcopy -O binary ${ELF_NAME} ${BIN_NAME}
+        COMMENT "Converting ${ELF_NAME} to ${BIN_NAME}"
+        VERBATIM)
