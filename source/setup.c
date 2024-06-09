@@ -4,7 +4,6 @@
 
 #include "../include/setup.h"
 
-
 void setupUart(void) {
     uint32_t status;
     status = UARTIntStatus(UART0_BASE, true);

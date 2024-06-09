@@ -6,9 +6,7 @@ TX_THREAD uart_thread;
 static ULONG my_thread_stack[1024];
 static ULONG uart_thread_stack[1024];
 
-void uartThread(ULONG thread_input) {
-
-}
+void uartThread(ULONG thread_input) {}
 
 void thread_entry(ULONG thread_input) {
     volatile uint32_t ui32Loop;
